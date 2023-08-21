@@ -1,6 +1,4 @@
-import { useRecoilState } from "recoil";
 import { Movie } from "../typings";
-import { baseUrl } from "../constants/movie";
 
 interface Props {
   movie: Movie;

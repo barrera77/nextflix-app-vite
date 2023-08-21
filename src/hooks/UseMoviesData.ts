@@ -14,7 +14,7 @@ interface MovieData {
   netflixOriginals: Movie[];
 }
 
-const useMovieData = (): MovieData => {
+const useMoviesData = (): MovieData => {
   const [netflixOriginals, setNetflixOriginals] = useState<Movie[]>([]);
   const [trending, setTrending] = useState<Movie[]>([]);
   const [topRated, setTopRated] = useState<Movie[]>([]);
@@ -80,4 +80,4 @@ const useMovieData = (): MovieData => {
   };
 };
 
-export default useMovieData;
+export default useMoviesData;
