@@ -12,9 +12,11 @@
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "axios": "^1.4.0",
+    "firebase": "^10.2.0",
     "heroicons": "^2.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.15.0",
     "recoil": "^0.7.7",

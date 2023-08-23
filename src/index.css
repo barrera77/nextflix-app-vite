@@ -72,4 +72,8 @@
   .bannerImage {
     @apply w-screen;
   }
+
+  .loginImage {
+    @apply object-fill;
+  }
 }
