@@ -1,7 +1,11 @@
+import { useRecoilValue } from "recoil";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import Row from "../components/Row";
 import useMoviesData from "../hooks/UseMoviesData";
+import useAuth from "../hooks/useAuth";
+import { modalState, movieState } from "../atoms/modalAtom";
+import Modal from "../components/Modal";
 
 const Home = () => {
   const {
@@ -14,12 +18,21 @@ const Home = () => {
     documentaries,
   } = useMoviesData();
 
-  return (
-    <div className={"relative h-screen bg-gradient-to-b lg:h-[140vh]"}>
-      <Header></Header>
+  const { loading, user } = useAuth();
+  const showModal = useRecoilValue(modalState);
+  const movie = useRecoilValue(movieState);
 
+  if (loading === null) return null;
+
+  return (
+    <div
+      className={`relative h-screen bg-gradient-to-b lg:h-[140vh] ${
+        showModal && "!h-screen overflow-hidden"
+      }`}
+    >
+      <Header />
       <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
-        <Banner></Banner>
+        <Banner />
         <section className="md:space-y-20">
           <Row title="Trending Now" movies={trending} />
           <Row title="Top Rated" movies={topRated} />
@@ -31,6 +44,7 @@ const Home = () => {
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
+      {showModal && <Modal />}
     </div>
   );
 };

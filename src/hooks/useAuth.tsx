@@ -8,7 +8,7 @@ import {
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 
 interface IAuth {
   user: User | null;
@@ -34,11 +34,11 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   //Persisting the user
   useEffect(
@@ -65,8 +65,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setUser(userCredential.user);
-        navigate("/");
         setLoading(false);
+        navigate("/Home");
       })
       .catch((error) => alert(error.message))
       .finally(() => setLoading(false));
@@ -78,8 +78,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setUser(userCredential.user);
-        navigate("/");
         setLoading(false);
+        navigate("/Home");
       })
       .catch((error) => alert(error.message))
       .finally(() => setLoading(false));

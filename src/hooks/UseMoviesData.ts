@@ -42,7 +42,6 @@ const useMoviesData = (): MovieData => {
           }),
         ]);
 
-        setTopRated(responseArray[1].data.results);
         setTrending(responseArray[0].data.results);
         setTopRated(responseArray[1].data.results);
         setActionMovies(responseArray[2].data.results);
