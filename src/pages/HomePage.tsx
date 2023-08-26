@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Row from "../components/Row";
 import useMoviesData from "../hooks/UseMoviesData";
 import useAuth from "../hooks/useAuth";
-import { modalState, movieState } from "../atoms/modalAtom";
+import { modalState } from "../atoms/modalAtom";
 import Modal from "../components/Modal";
 
 const Home = () => {
@@ -18,9 +18,9 @@ const Home = () => {
     documentaries,
   } = useMoviesData();
 
-  const { loading, user } = useAuth();
+  const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
-  const movie = useRecoilValue(movieState);
+  //const movie = useRecoilValue(movieState);
 
   if (loading === null) return null;
 

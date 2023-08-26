@@ -8,7 +8,7 @@ import {
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { auth } from "../firebase";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface IAuth {
   user: User | null;
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   const navigate = useNavigate();
 
   //Persisting the user

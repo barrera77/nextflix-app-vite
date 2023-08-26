@@ -9,19 +9,18 @@ import {
   PlusIcon,
 } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
-import { Genre, Element, Movie } from "../typings";
+import { Genre, Element } from "../typings";
 import ReactPlayer from "react-player";
-import { DocumentData } from "firebase/firestore";
 import { FaPlay } from "react-icons/fa";
 
 function Modal() {
   const API_KEY = "6b0d00123c4fde0c63391f970dd8920f";
   const [showModal, setShowModal] = useRecoilState(modalState);
-  const [movie, setMovie] = useRecoilState(movieState);
+  const [movie] = useRecoilState(movieState);
   const [trailer, setTrailer] = useState("");
   const [genres, setGenres] = useState<Genre[]>([]);
   const [muted, setMuted] = useState(false);
-  const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
+  //const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
 
   useEffect(() => {
     if (!movie) return;
