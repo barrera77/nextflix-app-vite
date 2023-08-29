@@ -6,6 +6,7 @@ import useMoviesData from "../hooks/UseMoviesData";
 import useAuth from "../hooks/useAuth";
 import { modalState } from "../atoms/modalAtom";
 import Modal from "../components/Modal";
+import Plans from "../components/Plans";
 
 const Home = () => {
   const {
@@ -20,9 +21,12 @@ const Home = () => {
 
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
+  const subscription = false;
   //const movie = useRecoilValue(movieState);
 
-  if (loading === null) return null;
+  if (loading || subscription === null) return null;
+
+  if (!subscription) return <Plans />;
 
   return (
     <div
