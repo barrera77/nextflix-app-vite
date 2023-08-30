@@ -7,6 +7,10 @@ import useAuth from "../hooks/useAuth";
 import { modalState } from "../atoms/modalAtom";
 import Modal from "../components/Modal";
 import Plans from "../components/Plans";
+import { useEffect, useState } from "react";
+import { Product } from "@stripe/firestore-stripe-payments";
+import { onSnapshot, collection, query, where } from "firebase/firestore";
+import { db } from "../firebase";
 
 const Home = () => {
   const {
@@ -24,9 +28,19 @@ const Home = () => {
   const subscription = false;
   //const movie = useRecoilValue(movieState);
 
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "products"), where("active", "==", true));
+    onSnapshot(q, (snapshot) => {
+      const productDocs = snapshot.docs.map((doc) => doc.data()) as Product[];
+      setProducts(productDocs);
+    });
+  }, []);
+
   if (loading || subscription === null) return null;
 
-  if (!subscription) return <Plans />;
+  if (!subscription) return <Plans products={products} />;
 
   return (
     <div

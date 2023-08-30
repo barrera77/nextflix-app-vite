@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { CheckIcon } from "@heroicons/react/24/solid";
-import { Table } from "@mui/material";
 
-function Plans() {
+import { Product } from "@stripe/firestore-stripe-payments";
+import { useState } from "react";
+import Table from "./Table";
+
+interface Props {
+  products: Product[];
+}
+
+function Plans({ products }: Props) {
   const { logout } = useAuth();
+  const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2]);
 
   return (
     <div>
@@ -46,7 +54,18 @@ function Plans() {
         </ul>
 
         <div className="mt-4 flex flex-col space-y-4">
-          <div className="flex w-full items-center justify-center self-end md:w-3/5"></div>
+          <div className="flex w-full items-center justify-center self-end md:w-3/5">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className={`planBox ${
+                  selectedPlan?.id === product.id ? "opacity-100" : "opacity-60"
+                }`}
+              >
+                {product.name}
+              </div>
+            ))}
+          </div>
           <Table />
         </div>
       </main>
